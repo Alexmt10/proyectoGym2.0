@@ -1,5 +1,11 @@
 package gymachaca;
 
+/**
+ * La clase Persona representa a una persona con información básica como DNI, nombre, apellido, teléfono y dirección.
+ * 
+ * 
+ * @author Alejandro Molina
+ */
 public class Persona {
 	
 	protected String dni;
@@ -10,11 +16,24 @@ public class Persona {
 	
 	
 	
-	
+	/**
+     * Crea una nueva instancia de Persona con el DNI especificado.
+     * 
+     * @param dni El Documento Nacional de Identidad de la persona
+     */
 	public Persona(String dni) {
 		
 		this.dni = dni;
 	}
+	  /**
+     * Crea una nueva instancia de Persona con todos los atributos especificados.
+     * 
+     * @param dni El Documento Nacional de Identidad de la persona
+     * @param nombre El nombre de la persona
+     * @param apellido El apellido de la persona
+     * @param telefono El número de teléfono de la persona
+     * @param direccion La dirección de la persona
+     */
 	public Persona(String dni, String nombre, String apellido, String telefono, String direccion) {
 		
 		this.dni = dni;

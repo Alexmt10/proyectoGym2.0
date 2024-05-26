@@ -1,5 +1,10 @@
 package gymachaca;
-
+/**
+ * La clase Alimentos representa un alimento con información detallada como código de alimento, nombre, precio por unidad,
+ * calorías, cantidad disponible, estamina del producto y cantidad del cliente.
+ * 
+ * @autor Alejandro Molina
+ */
 public class Alimentos {
 
 	protected int codAlimento;
@@ -12,10 +17,13 @@ public class Alimentos {
 		
 	
 	
-	
-
-
-
+	  /**
+     * Crea una nueva instancia de Alimentos con el código del alimento, nombre y cantidad del cliente especificados.
+     * 
+     * @param codAlimento El código del alimento
+     * @param nombre El nombre del alimento
+     * @param catidadCliente La cantidad del cliente del alimento
+     */
 	public Alimentos(int codAlimento, String nombre, int catidadCliente) {
 		
 		this.codAlimento = codAlimento;
@@ -23,7 +31,15 @@ public class Alimentos {
 		this.catidadCliente = catidadCliente;
 	}
 
-
+	 /**
+     * Crea una nueva instancia de Alimentos con el código del alimento, nombre, calorías, estamina del producto y cantidad del cliente especificados.
+     * 
+     * @param codAlimento El código del alimento
+     * @param nombre El nombre del alimento
+     * @param calorias Las calorías del alimento
+     * @param estaminaprod La estamina del producto del alimento
+     * @param catidadCliente La cantidad del cliente del alimento
+     */
 	public Alimentos(int codAlimento, String nombre, int calorias, int estaminaprod, int catidadCliente) {
 		
 		this.codAlimento = codAlimento;
@@ -33,7 +49,16 @@ public class Alimentos {
 		this.catidadCliente = catidadCliente;
 	}
 
-
+	   /**
+     * Crea una nueva instancia de Alimentos con el código del alimento, nombre, precio por unidad, calorías, cantidad disponible y estamina del producto especificados.
+     * 
+     * @param codAlimento El código del alimento
+     * @param nombre El nombre del alimento
+     * @param precioporunidad El precio por unidad del alimento
+     * @param calorias Las calorías del alimento
+     * @param cantidad_disponible La cantidad disponible del alimento
+     * @param estaminaprod La estamina del producto del alimento
+     */
 	public Alimentos(int codAlimento, String nombre, double precioporunidad, int calorias, int cantidad_disponible,
 			int estaminaprod) {
 		

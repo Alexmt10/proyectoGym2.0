@@ -18,6 +18,14 @@ import java.util.Set;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * La clase EjerciciosDAO gestiona las actividades de ejercicio realizadas por los clientes
+ * en la base de datos del gimnasio.
+ * 
+ * <p>Incluye métodos para conectar con la base de datos y realizar actividades de pesas y cardio.</p>
+ * 
+ * @autor Alejandro Molina
+ */
 public class EjerciciosDAO {
 
 	private Connection conexion;
@@ -27,10 +35,18 @@ public class EjerciciosDAO {
 	private final String MAQUINA = "localhost";
 	private final String BD = "Gymachaca";
 
-	public EjerciciosDAO() {
-		conexion = conectar();
-	}
+	  /**
+     * Constructor que establece la conexión con la base de datos.
+     */
+    public EjerciciosDAO() {
+        conexion = conectar();
+    }
 
+    /**
+     * Establece la conexión con la base de datos.
+     * 
+     * @return la conexión a la base de datos, o null si no se pudo conectar.
+     */
 	private Connection conectar() {
 		Connection con = null;
 		String url = "jdbc:mysql://" + MAQUINA + "/" + BD;
@@ -42,6 +58,17 @@ public class EjerciciosDAO {
 		return con;
 	}
 
+    /**
+     * Permite a un cliente realizar una actividad de cardio o de pesas.
+     * 
+     * <p>Solicita el DNI del cliente, verifica su existencia, permite seleccionar entre actividades de pesas y cardio,
+     * actualiza la estamina del cliente y verifica la disponibilidad de monitores para las actividades de cardio.</p>
+     * 
+     * @param connection la conexión a la base de datos
+     * @param sc el scanner para entrada de datos
+     * @param dniCliente el DNI del cliente
+     * @throws SQLException si ocurre un error al actualizar la base de datos
+     */
 	public void realizarActividad() {
 		Connection connection = conectar();
 		Scanner sc = new Scanner(System.in);

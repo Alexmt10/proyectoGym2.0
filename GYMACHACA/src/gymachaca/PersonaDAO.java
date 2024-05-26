@@ -9,9 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * La clase PersonaDAO proporciona métodos para interactuar con la tabla "Persona" en la base de datos Gymachaca.
+ * Permite la creación, lectura, modificación y eliminación de registros de personas, incluyendo clientes y monitores.
+ * Además, esta clase maneja la conexión a la base de datos y ejecuta consultas SQL correspondientes.
+ */
 public class PersonaDAO {
 
+	  /**
+     * La conexión a la base de datos.
+     */
 	private Connection conexion;
 
 	private final String USUARIO = "root";
@@ -19,6 +26,9 @@ public class PersonaDAO {
 	private final String MAQUINA = "localhost";
 	private final String BD = "Gymachaca";
 
+	/**
+     * Constructor de la clase PersonaDAO. Establece la conexión a la base de datos.
+     */
 	public PersonaDAO() {
 		conexion = conectar();
 	}
@@ -34,6 +44,20 @@ public class PersonaDAO {
 		return con;
 	}
 
+	 /**
+     * Crea un nuevo registro de persona en la base de datos, ya sea cliente o monitor,
+     * según la selección del usuario.
+     * @param DNI El dni del cliente
+     * @param nombre El nombre de la persona
+     * @param apellido El apellido de la persona
+     * @param telefono El telefono de la persona
+     * @param direccion La direccion de la persona
+     * @param stamina La estamina del cliente
+     * @param bono El bono del cliente
+     * @param cartera La cartera del cliente
+     * @param tipo El tipo de clase que da el monitor
+     * 
+     */
 	public void crearPersona() {
 
 		Connection connection = conectar();
@@ -197,6 +221,11 @@ public class PersonaDAO {
 		}
 	}
 
+	  /**
+     * Lee y muestra la información de un cliente específico basado en su DNI.
+     *
+     * @return El objeto Cliente correspondiente al DNI proporcionado.
+     */
 	public Cliente leerCliente() {
 		var sc = new Scanner(System.in);
 		Cliente cliente = null;
@@ -230,6 +259,11 @@ public class PersonaDAO {
 		return cliente;
 	}
 
+    /**
+     * Lee y muestra la información de un monitor específico basado en su DNI.
+     *
+     * @return El objeto Monitor correspondiente al DNI proporcionado.
+     */
 	public Monitor leerMonitor() {
 		var sc = new Scanner(System.in);
 		Monitor monitor = null;
@@ -261,6 +295,9 @@ public class PersonaDAO {
 		return monitor;
 	}
 
+    /**
+     * Elimina un cliente de la base de datos según su DNI.
+     */
 	public void elemininarCliente() {
 		var sc = new Scanner(System.in);
 
@@ -283,6 +320,9 @@ public class PersonaDAO {
 		}
 	}
 
+	 /**
+     * Elimina un monitor de la base de datos según su DNI.
+     */
 	public void elemininarMonitor() {
 		var sc = new Scanner(System.in);
 
@@ -305,6 +345,9 @@ public class PersonaDAO {
 		}
 	}
 
+	  /**
+     * Modifica la información de un cliente en la base de datos según su DNI.
+     */
 	public void modificarCliente() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce el DNI del cliente que deseas modificar:");
@@ -386,6 +429,12 @@ public class PersonaDAO {
 			System.out.println("Error al modificar el cliente: " + e.getMessage());
 		}
 	}
+	
+	
+
+    /**
+     * Modifica la información de un monitor en la base de datos según su DNI.
+     */
 	public void modificarMonitor() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el DNI del monitor que deseas modificar:");

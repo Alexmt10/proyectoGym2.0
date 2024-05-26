@@ -14,6 +14,14 @@ import java.util.Set;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * La clase ComprarDao gestiona las operaciones relacionadas con las compras y el consumo de alimentos
+ * en la base de datos del gimnasio.
+ * 
+ * <p>Incluye métodos para conectar con la base de datos, realizar compras y consumir alimentos.</p>
+ * 
+ * @autor Alejandro Molina
+ */
 public class ComprarDao {
 
 	private Connection conexion;
@@ -23,10 +31,20 @@ public class ComprarDao {
 	private final String MAQUINA = "localhost";
 	private final String BD = "Gymachaca";
 
+	
+    /**
+     * Constructor que establece la conexión con la base de datos.
+     */
 	public ComprarDao() {
 		conexion = conectar();
 	}
 
+
+    /**
+     * Establece la conexión con la base de datos.
+     * 
+     * @return la conexión a la base de datos, o null si no se pudo conectar.
+     */
 	private Connection conectar() {
 		Connection con = null;
 		String url = "jdbc:mysql://" + MAQUINA + "/" + BD;
@@ -37,7 +55,12 @@ public class ComprarDao {
 		}
 		return con;
 	}
-
+	   /**
+     * Realiza una compra de alimentos para un cliente en la base de datos.
+     * 
+     * <p>Solicita el DNI del cliente, verifica su existencia, muestra los productos disponibles,
+     * permite seleccionar y comprar productos y actualiza la base de datos en consecuencia.</p>
+     */
 	public void comprar() {
 		Connection connection = conectar();
 		Scanner sc = new Scanner(System.in);
@@ -168,6 +191,12 @@ public class ComprarDao {
 		}
 	}
 
+	 /**
+     * Permite a un cliente consumir alimentos previamente comprados.
+     * 
+     * <p>Solicita el DNI del cliente, muestra los alimentos disponibles para el cliente,
+     * permite seleccionar y consumir alimentos y actualiza la base de datos en consecuencia.</p>
+     */
 	public void consumirAlimentos() {
 		Connection connection = conectar();
 		Scanner scanner = new Scanner(System.in);
@@ -214,8 +243,14 @@ public class ComprarDao {
 			}
 		}
 	}
-
-	private void mostrarAlimentosComprados(Connection connection, String dniCliente) throws SQLException {
+	   /**
+     * Muestra los alimentos comprados por un cliente.
+     * 
+     * @param connection la conexión a la base de datos
+     * @param dniCliente el DNI del cliente
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
+	public void mostrarAlimentosComprados(Connection connection, String dniCliente) throws SQLException {
 		String query = "SELECT nombreAlimento, SUM(cantidad) AS cantidad_total FROM Comprar WHERE dniCliente = ? GROUP BY nombreAlimento";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			ps.setString(1, dniCliente);
@@ -228,7 +263,17 @@ public class ComprarDao {
 		}
 	}
 
-	private boolean verificarAlimentoDisponible(Connection connection, String dniCliente, String nombreAlimento,
+    /**
+     * Verifica si el cliente tiene suficiente cantidad de un alimento específico para consumir.
+     * 
+     * @param connection la conexión a la base de datos
+     * @param dniCliente el DNI del cliente
+     * @param nombreAlimento el nombre del alimento
+     * @param cantidadConsumir la cantidad que se desea consumir
+     * @return true si el cliente tiene suficiente cantidad del alimento, false en caso contrario
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
+	public boolean verificarAlimentoDisponible(Connection connection, String dniCliente, String nombreAlimento,
 			int cantidadConsumir) throws SQLException {
 		String query = "SELECT cantidad FROM Comprar WHERE dniCliente = ? AND nombreAlimento = ?";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -249,7 +294,16 @@ public class ComprarDao {
 		return false;
 	}
 
-	private void consumirAlimento(Connection connection, String dniCliente, String nombreAlimento, int cantidadConsumir)
+	  /**
+     * Actualiza la base de datos para reflejar el consumo de un alimento por parte de un cliente.
+     * 
+     * @param connection la conexión a la base de datos
+     * @param dniCliente el DNI del cliente
+     * @param nombreAlimento el nombre del alimento
+     * @param cantidadConsumir la cantidad que se desea consumir
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
+	public void consumirAlimento(Connection connection, String dniCliente, String nombreAlimento, int cantidadConsumir)
             throws SQLException {
 
         String actualizarCantidadQuery = "UPDATE Alimentos SET cantidad_disponible = cantidad_disponible - ? WHERE nombre = ?";
@@ -272,7 +326,16 @@ public class ComprarDao {
         System.out.println("Se han consumido " + cantidadConsumir + " unidades de " + nombreAlimento + ".");
     }
 
-    private void actualizarEstaminaCliente(Connection connection, String dniCliente, String nombreAlimento,
+    /**
+     * Actualiza la estamina del cliente en función del alimento consumido.
+     * 
+     * @param connection la conexión a la base de datos
+     * @param dniCliente el DNI del cliente
+     * @param nombreAlimento el nombre del alimento
+     * @param cantidadConsumir la cantidad que se ha consumido
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
+    public void actualizarEstaminaCliente(Connection connection, String dniCliente, String nombreAlimento,
             int cantidadConsumir) throws SQLException {
         String queryEstamina = "SELECT estaminaproduct FROM Alimentos WHERE nombre = ?";
         try (PreparedStatement psEstamina = connection.prepareStatement(queryEstamina)) {
