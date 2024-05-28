@@ -3,7 +3,7 @@ package gymachaca;
  * La clase Alimentos representa un alimento con información detallada como código de alimento, nombre, precio por unidad,
  * calorías, cantidad disponible, estamina del producto y cantidad del cliente.
  * 
- * @autor Alejandro Molina
+ * @autor Alejandro Molina Tendero
  */
 public class Alimentos {
 
