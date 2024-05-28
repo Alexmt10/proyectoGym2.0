@@ -33,19 +33,7 @@ public class Cliente extends Persona {
 	}
 
 	
-
-    /**
-     * Crea una nueva instancia de Cliente con todos los atributos especificados.
-     * 
-     * @param dni El Documento Nacional de Identidad del cliente
-     * @param nombre El nombre del cliente
-     * @param apellido El apellido del cliente
-     * @param telefono El número de teléfono del cliente
-     * @param direccion La dirección del cliente
-     * @param stamina La estamina del cliente
-     * @param bono El bono del cliente
-     * @param cartera La cartera del cliente
-     */
+	
 	public Cliente(String dni, String nombre, String apellido, String telefono, String direccion, int stamina, Bono bono,
 			double cartera) {
 		super(dni, nombre, apellido, telefono, direccion);
