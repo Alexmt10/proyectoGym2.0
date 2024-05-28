@@ -45,7 +45,7 @@ public class ComprarDao {
      * 
      * @return la conexión a la base de datos, o null si no se pudo conectar.
      */
-	private Connection conectar() {
+	public Connection conectar() {
 		Connection con = null;
 		String url = "jdbc:mysql://" + MAQUINA + "/" + BD;
 		try {
