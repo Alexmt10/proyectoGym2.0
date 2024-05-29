@@ -6,6 +6,11 @@ JOIN Persona p ON c.dniCliente = p.dni
 LEFT JOIN Cardio ca ON c.dniCliente = ca.dniCliente
 LEFT JOIN Monitor m ON ca.dniMonitor = m.dniMonitor;
 
+SELECT  Persona.nombre AS Nombre_Cliente, Cliente.bono AS Tipo_Bono,
+COUNT(RealizaLevantamientoDePesas.id) AS Total_Ejercicios_Pesas
+FROM  Persona JOIN Cliente ON Persona.dni = Cliente.dniCliente
+LEFT JOIN   RealizaLevantamientoDePesas ON Cliente.dniCliente = RealizaLevantamientoDePesas.dniCliente
+GROUP BY Persona.nombre, Cliente.bono;
 
 SELECT bono, COUNT(*) AS TotalClientes
 FROM Cliente
